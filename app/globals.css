@@ -1,69 +1,297 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+'use client';
 
-@layer base {
-  :root {
-    /* Mountain Escape Theme */
-    --background: 0 0% 96.9%; /* Off-White #F7F7F7 */
-    --foreground: 210 48% 15%; /* Midnight Blue #14213D */
-    --card: 0 0% 100%;
-    --card-foreground: 210 48% 15%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 48% 15%;
-    --primary: 104 65% 26%; /* Forest Green #2B7A0B */
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 85.1%; /* Misty Gray #D9D9D9 */
-    --secondary-foreground: 210 48% 15%;
-    --muted: 0 0% 85.1%;
-    --muted-foreground: 210 48% 35%;
-    --accent: 16 25% 57%; /* Earthy Brown #8D6E63 */
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 85.1%;
-    --input: 0 0% 85.1%;
-    --ring: 104 65% 26%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 210 48% 15%;
-    --foreground: 0 0% 98%;
-    --card: 210 48% 15%;
-    --card-foreground: 0 0% 98%;
-    --popover: 210 48% 15%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 104 65% 26%;
-    --secondary: 210 48% 25%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 210 48% 25%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 16 25% 57%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 210 48% 25%;
-    --input: 210 48% 25%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-}
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
+import { MapPin, Calendar, DollarSign, Heart, Clock, Loader as Loader2, TreePine, Globe, Map, Mountain, Leaf } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+const interests = [
+  'Museums & Culture',
+  'Food & Dining',
+  'Nightlife',
+  'Outdoor Activities',
+  'Shopping',
+  'Historical Sites',
+  'Art & Galleries',
+  'Nature & Parks',
+  'Architecture',
+  'Local Experiences',
+  'Adventure Sports',
+  'Photography'
+];
+
+export default function ItineraryGenerator() {
+  const [formData, setFormData] = useState({
+    destination: '',
+    startDate: '',
+    endDate: '',
+    budget: '',
+    groupSize: '',
+    interests: [] as string[],
+    pace: '',
+    accommodation: '',
+    notes: ''
+  });
+  const [isGenerating, setIsGenerating] = useState(false);
+  const router = useRouter();
+
+  const handleInterestToggle = (interest: string) => {
+    setFormData(prev => ({
+      ...prev,
+      interests: prev.interests.includes(interest)
+        ? prev.interests.filter(i => i !== interest)
+        : [...prev.interests, interest]
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsGenerating(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Redirect to trip details with mock data
+    router.push('/trip/sample');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-off-white via-misty-gray/20 to-green-50 animate-fade-in">
+      {/* Navigation */}
+      <nav className="border-b border-misty-gray bg-white/95 backdrop-blur-sm animate-slide-up">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <Link href="/" className="flex items-center space-x-2 group">
+              <div className="bg-forest-green p-2 rounded-lg">
+                <TreePine className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold text-gray-900 font-display tracking-tight">TravelCraft</span>
+            </Link>
+            <div className="hidden md:flex items-center space-x-6 animate-slide-in-right">
+              <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1">
+                <Globe className="h-4 w-4" />
+                <span>Home</span>
+              </Link>
+              <Link href="/generator" className="text-blue-600 font-semibold flex items-center space-x-1">
+                <Map className="h-4 w-4" />
+                <span>Plan Trip</span>
+              </Link>
+              <Link href="/trips" className="text-gray-600 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1">
+                <Calendar className="h-4 w-4" />
+                <span>My Trips</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-4xl">
+        <div className="text-center mb-12 animate-slide-up">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4 font-display tracking-tight">Create Your Perfect Itinerary</h1>
+          <p className="text-xl text-gray-600 font-light">Tell us your preferences and we'll craft a personalized travel plan</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-8 animate-slide-up" style={{animationDelay: '0.2s'}}>
+          {/* Destination & Dates */}
+          <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-left">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <MapPin className="h-5 w-5 text-blue-600" />
+                <span className="font-display">Destination & Dates</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div>
+                <Label htmlFor="destination" className="font-medium">Where would you like to go?</Label>
+                <Input
+                  id="destination"
+                  placeholder="e.g., Paris, France or Tokyo, Japan"
+                  value={formData.destination}
+                  onChange={(e) => setFormData(prev => ({ ...prev, destination: e.target.value }))}
+                  required
+                  className="mt-2 transition-all duration-300 focus:scale-[1.02]"
+                />
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="startDate" className="font-medium">Start Date</Label>
+                  <Input
+                    id="startDate"
+                    type="date"
+                    value={formData.startDate}
+                    onChange={(e) => setFormData(prev => ({ ...prev, startDate: e.target.value }))}
+                    required
+                    className="mt-2 transition-all duration-300 focus:scale-[1.02]"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="endDate" className="font-medium">End Date</Label>
+                  <Input
+                    id="endDate"
+                    type="date"
+                    value={formData.endDate}
+                    onChange={(e) => setFormData(prev => ({ ...prev, endDate: e.target.value }))}
+                    required
+                    className="mt-2 transition-all duration-300 focus:scale-[1.02]"
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Budget & Group */}
+          <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-right" style={{animationDelay: '0.1s'}}>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <DollarSign className="h-5 w-5 text-blue-600" />
+                <span className="font-display">Budget & Group Size</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="budget" className="font-medium">Budget per person (USD)</Label>
+                  <Select value={formData.budget} onValueChange={(value) => setFormData(prev => ({ ...prev, budget: value }))}>
+                    <SelectTrigger className="mt-2 transition-all duration-300 hover:scale-[1.02]">
+                      <SelectValue placeholder="Select budget range" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="budget">Budget ($0 - $100/day)</SelectItem>
+                      <SelectItem value="mid">Mid-range ($100 - $300/day)</SelectItem>
+                      <SelectItem value="luxury">Luxury ($300+ /day)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="groupSize" className="font-medium">Group Size</Label>
+                  <Select value={formData.groupSize} onValueChange={(value) => setFormData(prev => ({ ...prev, groupSize: value }))}>
+                    <SelectTrigger className="mt-2 transition-all duration-300 hover:scale-[1.02]">
+                      <SelectValue placeholder="Number of travelers" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="solo">Solo traveler</SelectItem>
+                      <SelectItem value="couple">Couple (2 people)</SelectItem>
+                      <SelectItem value="small">Small group (3-5 people)</SelectItem>
+                      <SelectItem value="large">Large group (6+ people)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Interests */}
+          <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-left" style={{animationDelay: '0.2s'}}>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <Heart className="h-5 w-5 text-blue-600" />
+                <span className="font-display">What interests you?</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {interests.map((interest) => (
+                  <div key={interest} className="flex items-center space-x-2 group">
+                    <Checkbox
+                      id={interest}
+                      checked={formData.interests.includes(interest)}
+                      onCheckedChange={() => handleInterestToggle(interest)}
+                    />
+                    <Label htmlFor={interest} className="text-sm cursor-pointer font-medium transition-colors group-hover:text-blue-600">
+                      {interest}
+                    </Label>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Travel Style */}
+          <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-right" style={{animationDelay: '0.3s'}}>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <Clock className="h-5 w-5 text-blue-600" />
+                <span className="font-display">Travel Style & Preferences</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="pace" className="font-medium">Travel Pace</Label>
+                  <Select value={formData.pace} onValueChange={(value) => setFormData(prev => ({ ...prev, pace: value }))}>
+                    <SelectTrigger className="mt-2 transition-all duration-300 hover:scale-[1.02]">
+                      <SelectValue placeholder="How fast-paced?" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="relaxed">Relaxed - Take it easy</SelectItem>
+                      <SelectItem value="moderate">Moderate - Balanced schedule</SelectItem>
+                      <SelectItem value="packed">Packed - See everything</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="accommodation" className="font-medium">Accommodation Style</Label>
+                  <Select value={formData.accommodation} onValueChange={(value) => setFormData(prev => ({ ...prev, accommodation: value }))}>
+                    <SelectTrigger className="mt-2 transition-all duration-300 hover:scale-[1.02]">
+                      <SelectValue placeholder="Preferred lodging" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="hostel">Budget/Hostel</SelectItem>
+                      <SelectItem value="hotel">Mid-range Hotel</SelectItem>
+                      <SelectItem value="luxury">Luxury Hotel/Resort</SelectItem>
+                      <SelectItem value="local">Local/Airbnb</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div>
+                <Label htmlFor="notes" className="font-medium">Additional Notes</Label>
+                <Textarea
+                  id="notes"
+                  placeholder="Any specific requirements, accessibility needs, or preferences..."
+                  value={formData.notes}
+                  onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
+                  className="mt-2 transition-all duration-300 focus:scale-[1.02]"
+                  rows={3}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="text-center animate-slide-up" style={{animationDelay: '0.4s'}}>
+            <Button 
+              type="submit" 
+              size="lg" 
+    --background: 210 48% 15%; /* Midnight Blue */
+              className="text-lg px-12 py-6 bg-blue-600 hover:bg-blue-700 font-semibold"
+            >
+              {isGenerating ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Crafting Your Itinerary...
+    --primary-foreground: 104 65% 26%; /* Forest Green */
+              ) : (
+                <>
+                  <Compass className="mr-2 h-5 w-5" />
+                  Generate My Itinerary
+    --accent: 16 25% 57%; /* Earthy Brown */
+              )}
+            </Button>
+            {isGenerating && (
+              <p className="text-gray-600 mt-4 font-light animate-pulse">
+                Analyzing destinations, checking weather, optimizing routes...
+              </p>
+            )}
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }

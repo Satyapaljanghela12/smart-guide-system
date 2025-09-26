@@ -60,37 +60,37 @@ const features = [
     icon: TreePine,
     title: 'Eco-Friendly Routes',
     description: 'Discover sustainable travel paths that minimize environmental impact.',
-    color: 'bg-green-50 text-forest-green'
+    color: 'bg-forest-green/10 text-forest-green'
   },
   {
     icon: Mountain,
     title: 'Mountain Adventures',
     description: 'Expert-curated trekking routes and mountain climbing experiences.',
-    color: 'bg-slate-50 text-midnight-blue'
+    color: 'bg-midnight-blue/10 text-midnight-blue'
   },
   {
     icon: Tent,
     title: 'Camping & Glamping',
     description: 'Find perfect camping spots and luxury glamping experiences.',
-    color: 'bg-amber-50 text-earthy-brown'
+    color: 'bg-earthy-brown/10 text-earthy-brown'
   },
   {
     icon: Binoculars,
     title: 'Wildlife Watching',
     description: 'Spot rare wildlife with guided tours and expert naturalists.',
-    color: 'bg-green-50 text-forest-green'
+    color: 'bg-forest-green/10 text-forest-green'
   },
   {
     icon: Route,
     title: 'Hiking Trails',
     description: 'Detailed trail maps with difficulty levels and scenic viewpoints.',
-    color: 'bg-slate-50 text-midnight-blue'
+    color: 'bg-midnight-blue/10 text-midnight-blue'
   },
   {
     icon: Leaf,
     title: 'Nature Conservation',
     description: 'Support local conservation efforts through responsible tourism.',
-    color: 'bg-amber-50 text-earthy-brown'
+    color: 'bg-earthy-brown/10 text-earthy-brown'
   }
 ];
 
@@ -151,7 +151,7 @@ const stats = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-off-white via-misty-gray/20 to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-off-white via-misty-gray/20 to-forest-green/5">
       {/* Navigation */}
       <nav className="border-b border-misty-gray bg-white/95 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

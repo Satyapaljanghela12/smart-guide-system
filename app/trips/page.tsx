@@ -53,21 +53,21 @@ export default function MyTrips() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2 group">
-              <div className="bg-blue-600 p-2 rounded-lg">
-                <Compass className="h-6 w-6 text-white" />
+              <div className="bg-forest-green p-2 rounded-lg">
+                <TreePine className="h-6 w-6 text-white" />
               </div>
-              <span className="text-2xl font-bold text-gray-900 font-display tracking-tight">TravelCraft</span>
+              <span className="text-2xl font-bold text-midnight-blue font-display tracking-tight">EcoTrail</span>
             </Link>
             <div className="hidden md:flex items-center space-x-6 animate-slide-in-right">
-              <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1">
+              <Link href="/" className="text-midnight-blue hover:text-forest-green transition-colors font-medium flex items-center space-x-1">
                 <Globe className="h-4 w-4" />
                 <span>Home</span>
               </Link>
-              <Link href="/generator" className="text-gray-600 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1">
+              <Link href="/generator" className="text-midnight-blue hover:text-forest-green transition-colors font-medium flex items-center space-x-1">
                 <Map className="h-4 w-4" />
-                <span>Plan Trip</span>
+                <span>Plan Adventure</span>
               </Link>
-              <Link href="/trips" className="text-blue-600 font-semibold flex items-center space-x-1">
+              <Link href="/trips" className="text-forest-green font-semibold flex items-center space-x-1">
                 <Calendar className="h-4 w-4" />
                 <span>My Trips</span>
               </Link>
@@ -79,13 +79,13 @@ export default function MyTrips() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex justify-between items-center mb-8 animate-slide-up">
           <div className="animate-slide-in-left">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2 font-display tracking-tight">My Trips</h1>
-            <p className="text-xl text-gray-600 font-light">Manage and view your travel itineraries</p>
+            <h1 className="text-4xl font-bold text-midnight-blue mb-2 font-display tracking-tight">My Adventures</h1>
+            <p className="text-xl text-midnight-blue/70 font-light">Manage and view your eco-travel itineraries</p>
           </div>
           <Link href="/generator" className="animate-slide-in-right">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 font-semibold">
+            <Button size="lg" className="bg-forest-green hover:bg-forest-green/90 font-semibold">
               <Plus className="h-5 w-5 mr-2" />
-              New Trip
+              New Adventure
             </Button>
           </Link>
         </div>
@@ -128,13 +128,13 @@ export default function MyTrips() {
                   </div>
                   <div className="flex gap-2 pt-2">
                     <Link href={`/trip/${trip.id}`} className="flex-1">
-                      <Button variant="outline" className="w-full border-blue-200 text-blue-600 hover:bg-blue-50 font-medium">
+                      <Button variant="outline" className="w-full border-forest-green/30 text-forest-green hover:bg-forest-green/5 font-medium">
                         View Details
                       </Button>
                     </Link>
                     {trip.status === 'draft' && (
                       <Link href="/generator" className="flex-1">
-                        <Button className="w-full bg-blue-600 hover:bg-blue-700 font-medium">
+                        <Button className="w-full bg-forest-green hover:bg-forest-green/90 font-medium">
                           Continue
                         </Button>
                       </Link>
@@ -150,12 +150,12 @@ export default function MyTrips() {
         {mockTrips.length === 0 && (
           <div className="text-center py-16 animate-slide-up">
             <div className="text-6xl mb-4">✈️</div>
-            <h3 className="text-2xl font-semibold text-gray-900 mb-2 font-display">No trips yet</h3>
-            <p className="text-gray-600 mb-6 font-light">Start planning your first adventure with TravelCraft</p>
+            <h3 className="text-2xl font-semibold text-midnight-blue mb-2 font-display">No adventures yet</h3>
+            <p className="text-midnight-blue/70 mb-6 font-light">Start planning your first eco-adventure with EcoTrail</p>
             <Link href="/generator">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 font-semibold">
+              <Button size="lg" className="bg-forest-green hover:bg-forest-green/90 font-semibold">
                 <Plus className="h-5 w-5 mr-2" />
-                Plan Your First Trip
+                Plan Your First Adventure
               </Button>
             </Link>
           </div>

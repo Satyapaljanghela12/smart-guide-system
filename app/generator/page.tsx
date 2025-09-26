@@ -103,7 +103,7 @@ export default function ItineraryGenerator() {
           <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-left">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <MapPin className="h-5 w-5 text-blue-600" />
+                <MapPin className="h-5 w-5 text-forest-green" />
                 <span className="font-display">Destination & Dates</span>
               </CardTitle>
             </CardHeader>
@@ -150,7 +150,7 @@ export default function ItineraryGenerator() {
           <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-right" style={{animationDelay: '0.1s'}}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <DollarSign className="h-5 w-5 text-blue-600" />
+                <DollarSign className="h-5 w-5 text-forest-green" />
                 <span className="font-display">Budget & Group Size</span>
               </CardTitle>
             </CardHeader>
@@ -191,7 +191,7 @@ export default function ItineraryGenerator() {
           <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-left" style={{animationDelay: '0.2s'}}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <Heart className="h-5 w-5 text-blue-600" />
+                <Heart className="h-5 w-5 text-forest-green" />
                 <span className="font-display">What interests you?</span>
               </CardTitle>
             </CardHeader>
@@ -205,6 +205,7 @@ export default function ItineraryGenerator() {
                       onCheckedChange={() => handleInterestToggle(interest)}
                     />
                     <Label htmlFor={interest} className="text-sm cursor-pointer font-medium transition-colors group-hover:text-blue-600">
+                    <Label htmlFor={interest} className="text-sm cursor-pointer font-medium transition-colors group-hover:text-forest-green">
                       {interest}
                     </Label>
                   </div>
@@ -217,7 +218,7 @@ export default function ItineraryGenerator() {
           <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-right" style={{animationDelay: '0.3s'}}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <Clock className="h-5 w-5 text-blue-600" />
+                <Clock className="h-5 w-5 text-forest-green" />
                 <span className="font-display">Travel Style & Preferences</span>
               </CardTitle>
             </CardHeader>
@@ -270,23 +271,23 @@ export default function ItineraryGenerator() {
               type="submit" 
               size="lg" 
               disabled={isGenerating}
-              className="text-lg px-12 py-6 bg-blue-600 hover:bg-blue-700 font-semibold"
+              className="text-lg px-12 py-6 bg-forest-green hover:bg-forest-green/90 font-semibold"
             >
               {isGenerating ? (
                 <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Crafting Your Itinerary...
+                  <Loader2 className="mr-2 h-5 w-5" />
+                  Crafting Your Adventure...
                 </>
               ) : (
                 <>
-                  <Compass className="mr-2 h-5 w-5" />
-                  Generate My Itinerary
+                  <TreePine className="mr-2 h-5 w-5" />
+                  Generate My Adventure
                 </>
               )}
             </Button>
             {isGenerating && (
-              <p className="text-gray-600 mt-4 font-light animate-pulse">
-                Analyzing destinations, checking weather, optimizing routes...
+              <p className="text-midnight-blue/70 mt-4 font-light">
+                Finding eco-friendly trails, checking weather, optimizing sustainable routes...
               </p>
             )}
           </div>

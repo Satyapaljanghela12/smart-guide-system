@@ -17,8 +17,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'TravelCraft - AI-Powered Itinerary Generator',
-  description: 'Generate personalized travel itineraries with AI-powered recommendations, real-time data, and interactive maps.',
+  title: 'EcoTrail - Sustainable Adventure Planning',
+  description: 'Plan eco-friendly adventures with AI-powered recommendations for sustainable travel, nature conservation, and responsible tourism.',
 };
 
 export default function RootLayout({
