@@ -66,6 +66,12 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        /* Mountain Escape Theme Colors */
+        'forest-green': '#2B7A0B',
+        'misty-gray': '#D9D9D9',
+        'off-white': '#F7F7F7',
+        'midnight-blue': '#14213D',
+        'earthy-brown': '#8D6E63',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
