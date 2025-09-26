@@ -3,56 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  MapPin, 
-  Clock, 
-  Star, 
-  Users, 
-  Calendar, 
-  DollarSign, 
-  Plane, 
-  Camera, 
-  Globe, 
-  Map, 
-  Navigation, 
-  TreePine, 
-  Mountain, 
-  Waves, 
-  Car, 
-  Train, 
-  Ship, 
-  Hotel, 
-  Utensils, 
-  Coffee, 
-  ShoppingBag, 
-  Music, 
-  Ticket, 
-  Shield, 
-  Smartphone, 
-  Wifi, 
-  CreditCard, 
-  MessageCircle, 
-  Heart, 
-  Share2, 
-  Download, 
-  CheckCircle, 
-  TrendingUp, 
-  Award, 
-  Zap,
-  Compass,
-  Leaf,
-  Sun,
-  Wind,
-  Tent,
-  Binoculars,
-  Backpack,
-  Route,
-  TreeDeciduous,
-  Flower2,
-  Bird,
-  Fish,
-  Sunrise
-} from 'lucide-react';
+import { MapPin, Clock, Star, Users, Calendar, DollarSign, Plane, Camera, Globe, Map, Navigation, TreePine, Mountain, Waves, Car, Brain as Train, Ship, Hotel, Utensils, Coffee, ShoppingBag, Music, Ticket, Shield, Smartphone, Wifi, CreditCard, MessageCircle, Heart, Share2, Download, CircleCheck as CheckCircle, TrendingUp, Award, Zap, Compass, Leaf, Sun, Wind, Tent, Binoculars, Backpack, Route, TreeDeciduous, Flower2, Bird, Fish, Sunrise } from 'lucide-react';
 import Link from 'next/link';
 
 const features = [
