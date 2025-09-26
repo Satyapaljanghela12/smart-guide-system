@@ -47,23 +47,23 @@ const statusColors = {
 
 export default function MyTrips() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 animate-fade-in">
       {/* Navigation */}
-      <nav className="border-b bg-white">
+      <nav className="border-b bg-white animate-slide-up">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <MapPin className="h-8 w-8 text-sky-600" />
-              <span className="text-2xl font-bold text-gray-900">TravelCraft</span>
+            <Link href="/" className="flex items-center space-x-2 group">
+              <MapPin className="h-8 w-8 text-sky-600 transition-transform group-hover:scale-110" />
+              <span className="text-2xl font-bold text-gray-900 font-display tracking-tight">TravelCraft</span>
             </Link>
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <div className="hidden md:flex items-center space-x-6 animate-slide-in-right">
+              <Link href="/" className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 font-medium">
                 Home
               </Link>
-              <Link href="/generator" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <Link href="/generator" className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 font-medium">
                 Plan Trip
               </Link>
-              <Link href="/trips" className="text-sky-600 font-medium">
+              <Link href="/trips" className="text-sky-600 font-semibold">
                 My Trips
               </Link>
             </div>
@@ -72,46 +72,46 @@ export default function MyTrips() {
       </nav>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">My Trips</h1>
-            <p className="text-xl text-gray-600">Manage and view your travel itineraries</p>
+        <div className="flex justify-between items-center mb-8 animate-slide-up">
+          <div className="animate-slide-in-left">
+            <h1 className="text-4xl font-bold text-gray-900 mb-2 font-display tracking-tight">My Trips</h1>
+            <p className="text-xl text-gray-600 font-light">Manage and view your travel itineraries</p>
           </div>
-          <Link href="/generator">
-            <Button size="lg">
+          <Link href="/generator" className="animate-slide-in-right">
+            <Button size="lg" className="transition-all duration-300 hover:scale-105 hover:shadow-lg font-semibold">
               <Plus className="h-5 w-5 mr-2" />
               New Trip
             </Button>
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 animate-slide-up" style={{animationDelay: '0.2s'}}>
           {mockTrips.map((trip) => (
-            <Card key={trip.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+            <Card key={trip.id} className="group hover:shadow-xl transition-all duration-500 overflow-hidden hover:-translate-y-2 animate-slide-in-left" style={{animationDelay: `${mockTrips.indexOf(trip) * 0.1}s`}}>
               <div className="aspect-video overflow-hidden">
                 <img
                   src={trip.image}
                   alt={trip.destination}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
               <CardHeader>
                 <div className="flex justify-between items-start">
-                  <CardTitle className="text-xl">{trip.destination}</CardTitle>
-                  <Badge className={statusColors[trip.status as keyof typeof statusColors]}>
+                  <CardTitle className="text-xl font-display">{trip.destination}</CardTitle>
+                  <Badge className={`${statusColors[trip.status as keyof typeof statusColors]} font-medium`}>
                     {trip.status}
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center text-gray-600 font-light">
                     <Calendar className="h-4 w-4 mr-2" />
                     <span className="text-sm">
                       {new Date(trip.startDate).toLocaleDateString()} - {new Date(trip.endDate).toLocaleDateString()}
                     </span>
                   </div>
-                  <div className="flex justify-between text-sm text-gray-600">
+                  <div className="flex justify-between text-sm text-gray-600 font-medium">
                     <div className="flex items-center">
                       <Clock className="h-4 w-4 mr-1" />
                       {trip.totalDays} days
@@ -123,13 +123,13 @@ export default function MyTrips() {
                   </div>
                   <div className="flex gap-2 pt-2">
                     <Link href={`/trip/${trip.id}`} className="flex-1">
-                      <Button variant="outline" className="w-full">
+                      <Button variant="outline" className="w-full transition-all duration-300 hover:scale-105 font-medium">
                         View Details
                       </Button>
                     </Link>
                     {trip.status === 'draft' && (
                       <Link href="/generator" className="flex-1">
-                        <Button className="w-full">
+                        <Button className="w-full transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium">
                           Continue
                         </Button>
                       </Link>
@@ -143,12 +143,12 @@ export default function MyTrips() {
 
         {/* Empty State */}
         {mockTrips.length === 0 && (
-          <div className="text-center py-16">
+          <div className="text-center py-16 animate-slide-up">
             <div className="text-6xl mb-4">✈️</div>
-            <h3 className="text-2xl font-semibold text-gray-900 mb-2">No trips yet</h3>
-            <p className="text-gray-600 mb-6">Start planning your first adventure with TravelCraft</p>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-2 font-display">No trips yet</h3>
+            <p className="text-gray-600 mb-6 font-light">Start planning your first adventure with TravelCraft</p>
             <Link href="/generator">
-              <Button size="lg">
+              <Button size="lg" className="transition-all duration-300 hover:scale-105 hover:shadow-lg font-semibold">
                 <Plus className="h-5 w-5 mr-2" />
                 Plan Your First Trip
               </Button>

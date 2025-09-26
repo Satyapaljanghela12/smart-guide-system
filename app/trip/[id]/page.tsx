@@ -59,21 +59,21 @@ export default function TripDetails() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 animate-fade-in">
       {/* Navigation */}
-      <nav className="border-b bg-white">
+      <nav className="border-b bg-white animate-slide-up">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <MapPin className="h-8 w-8 text-sky-600" />
-              <span className="text-2xl font-bold text-gray-900">TravelCraft</span>
+            <Link href="/" className="flex items-center space-x-2 group">
+              <MapPin className="h-8 w-8 text-sky-600 transition-transform group-hover:scale-110" />
+              <span className="text-2xl font-bold text-gray-900 font-display tracking-tight">TravelCraft</span>
             </Link>
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm" onClick={shareItinerary}>
+            <div className="flex items-center space-x-4 animate-slide-in-right">
+              <Button variant="outline" size="sm" onClick={shareItinerary} className="transition-all duration-300 hover:scale-105">
                 <Share2 className="h-4 w-4 mr-2" />
                 Share
               </Button>
-              <Button size="sm" onClick={downloadItinerary}>
+              <Button size="sm" onClick={downloadItinerary} className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
                 <Download className="h-4 w-4 mr-2" />
                 Download
               </Button>
@@ -83,13 +83,13 @@ export default function TripDetails() {
       </nav>
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-sky-600 to-emerald-600 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end">
+      <div className="bg-gradient-to-r from-sky-600 to-emerald-600 text-white animate-slide-up">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end animate-slide-in-left">
             <div>
-              <h1 className="text-4xl font-bold mb-4">{itinerary.destination}</h1>
-              <p className="text-xl text-sky-100 mb-6 max-w-2xl">{itinerary.overview}</p>
-              <div className="flex flex-wrap gap-4 text-sm">
+              <h1 className="text-4xl font-bold mb-4 font-display tracking-tight">{itinerary.destination}</h1>
+              <p className="text-xl text-sky-100 mb-6 max-w-2xl font-light">{itinerary.overview}</p>
+              <div className="flex flex-wrap gap-4 text-sm font-medium">
                 <div className="flex items-center">
                   <Calendar className="h-4 w-4 mr-1" />
                   {itinerary.totalDays} days
@@ -111,11 +111,11 @@ export default function TripDetails() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 animate-slide-in-left">
             <Tabs value={selectedDay.toString()} onValueChange={(value) => setSelectedDay(parseInt(value))}>
-              <TabsList className="grid grid-cols-3 lg:grid-cols-5 w-full mb-8">
+              <TabsList className="grid grid-cols-3 lg:grid-cols-5 w-full mb-8 animate-slide-up">
                 {itinerary.days.map((day, index) => (
-                  <TabsTrigger key={index} value={index.toString()} className="text-sm">
+                  <TabsTrigger key={index} value={index.toString()} className="text-sm font-medium transition-all duration-300 hover:scale-105">
                     Day {index + 1}
                   </TabsTrigger>
                 ))}
@@ -123,12 +123,12 @@ export default function TripDetails() {
 
               {itinerary.days.map((day, dayIndex) => (
                 <TabsContent key={dayIndex} value={dayIndex.toString()}>
-                  <Card>
+                  <Card className="transition-all duration-300 hover:shadow-lg animate-slide-up">
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
-                          <CardTitle className="text-2xl">{day.title}</CardTitle>
-                          <p className="text-gray-600 mt-1">{new Date(day.date).toLocaleDateString('en-US', { 
+                          <CardTitle className="text-2xl font-display">{day.title}</CardTitle>
+                          <p className="text-gray-600 mt-1 font-light">{new Date(day.date).toLocaleDateString('en-US', { 
                             weekday: 'long', 
                             year: 'numeric', 
                             month: 'long', 
@@ -157,17 +157,17 @@ export default function TripDetails() {
                         {day.activities.map((activity, activityIndex) => {
                           const IconComponent = activityIcons[activity.type as keyof typeof activityIcons] || MapPin;
                           return (
-                            <div key={activity.id} className="border rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div key={activity.id} className="border rounded-lg p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-slide-in-left" style={{animationDelay: `${activityIndex * 0.1}s`}}>
                               <div className="flex items-start justify-between mb-4">
                                 <div className="flex items-start space-x-4">
-                                  <div className="bg-sky-100 p-2 rounded-lg">
+                                  <div className="bg-sky-100 p-2 rounded-lg transition-all duration-300 hover:scale-110">
                                     <IconComponent className="h-5 w-5 text-sky-600" />
                                   </div>
                                   <div className="flex-1">
-                                    <h3 className="text-xl font-semibold mb-1">{activity.name}</h3>
-                                    <Badge variant="secondary" className="mb-2">{activity.type}</Badge>
-                                    <p className="text-gray-600 mb-3">{activity.description}</p>
-                                    <div className="flex items-center gap-4 text-sm text-gray-600">
+                                    <h3 className="text-xl font-semibold mb-1 font-display">{activity.name}</h3>
+                                    <Badge variant="secondary" className="mb-2 font-medium">{activity.type}</Badge>
+                                    <p className="text-gray-600 mb-3 font-light">{activity.description}</p>
+                                    <div className="flex items-center gap-4 text-sm text-gray-600 font-medium">
                                       <div className="flex items-center">
                                         <Clock className="h-4 w-4 mr-1" />
                                         {activity.duration} min
@@ -187,16 +187,16 @@ export default function TripDetails() {
                               
                               <div className="grid md:grid-cols-2 gap-4 text-sm">
                                 <div>
-                                  <h4 className="font-medium mb-2 flex items-center">
+                                  <h4 className="font-semibold mb-2 flex items-center">
                                     <MapPin className="h-4 w-4 mr-1" />
                                     Location
                                   </h4>
-                                  <p className="text-gray-600">{activity.location.address}</p>
-                                  <p className="text-gray-500 mt-1">Hours: {activity.openingHours}</p>
+                                  <p className="text-gray-600 font-light">{activity.location.address}</p>
+                                  <p className="text-gray-500 mt-1 font-light">Hours: {activity.openingHours}</p>
                                 </div>
                                 <div>
-                                  <h4 className="font-medium mb-2">Pro Tips</h4>
-                                  <ul className="text-gray-600 space-y-1">
+                                  <h4 className="font-semibold mb-2">Pro Tips</h4>
+                                  <ul className="text-gray-600 space-y-1 font-light">
                                     {activity.tips.slice(0, 2).map((tip, index) => (
                                       <li key={index} className="text-sm">• {tip}</li>
                                     ))}
@@ -210,11 +210,11 @@ export default function TripDetails() {
 
                       {day.transportNotes.length > 0 && (
                         <div className="mt-6 p-4 bg-sky-50 rounded-lg">
-                          <h4 className="font-medium mb-2 flex items-center">
+                          <h4 className="font-semibold mb-2 flex items-center">
                             <Navigation className="h-4 w-4 mr-1 text-sky-600" />
                             Transportation Tips
                           </h4>
-                          <ul className="text-sm text-gray-700 space-y-1">
+                          <ul className="text-sm text-gray-700 space-y-1 font-light">
                             {day.transportNotes.map((note, index) => (
                               <li key={index}>• {note}</li>
                             ))}
@@ -229,11 +229,11 @@ export default function TripDetails() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-6 animate-slide-in-right">
             {/* Trip Highlights */}
-            <Card>
+            <Card className="transition-all duration-300 hover:shadow-lg animate-slide-up">
               <CardHeader>
-                <CardTitle className="flex items-center">
+                <CardTitle className="flex items-center font-display">
                   <Heart className="h-5 w-5 mr-2 text-rose-600" />
                   Trip Highlights
                 </CardTitle>
@@ -243,7 +243,7 @@ export default function TripDetails() {
                   {itinerary.highlights.map((highlight, index) => (
                     <li key={index} className="flex items-start">
                       <Star className="h-4 w-4 mr-2 text-yellow-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{highlight}</span>
+                      <span className="text-sm font-light">{highlight}</span>
                     </li>
                   ))}
                 </ul>
@@ -251,9 +251,9 @@ export default function TripDetails() {
             </Card>
 
             {/* Map */}
-            <Card>
+            <Card className="transition-all duration-300 hover:shadow-lg animate-slide-up" style={{animationDelay: '0.1s'}}>
               <CardHeader>
-                <CardTitle>Trip Map</CardTitle>
+                <CardTitle className="font-display">Trip Map</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <MapComponent 
@@ -264,25 +264,25 @@ export default function TripDetails() {
             </Card>
 
             {/* Quick Stats */}
-            <Card>
+            <Card className="transition-all duration-300 hover:shadow-lg animate-slide-up" style={{animationDelay: '0.2s'}}>
               <CardHeader>
-                <CardTitle>Quick Stats</CardTitle>
+                <CardTitle className="font-display">Quick Stats</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Total Duration</span>
+                  <span className="text-gray-600 font-light">Total Duration</span>
                   <span className="font-medium">{itinerary.totalDays} days</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Estimated Cost</span>
+                  <span className="text-gray-600 font-light">Estimated Cost</span>
                   <span className="font-medium">${itinerary.totalCost}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Activities</span>
+                  <span className="text-gray-600 font-light">Activities</span>
                   <span className="font-medium">{itinerary.days.reduce((acc, day) => acc + day.activities.length, 0)}</span>
                 </div>
                 <Separator />
-                <Button className="w-full" onClick={downloadItinerary}>
+                <Button className="w-full transition-all duration-300 hover:scale-105 hover:shadow-lg font-semibold" onClick={downloadItinerary}>
                   <Download className="h-4 w-4 mr-2" />
                   Download Full Itinerary
                 </Button>

@@ -63,23 +63,23 @@ export default function ItineraryGenerator() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50">
+    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 animate-fade-in">
       {/* Navigation */}
-      <nav className="border-b bg-white/80 backdrop-blur-sm">
+      <nav className="border-b bg-white/80 backdrop-blur-sm animate-slide-up">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <MapPin className="h-8 w-8 text-sky-600" />
-              <span className="text-2xl font-bold text-gray-900">TravelCraft</span>
+            <Link href="/" className="flex items-center space-x-2 group">
+              <MapPin className="h-8 w-8 text-sky-600 transition-transform group-hover:scale-110" />
+              <span className="text-2xl font-bold text-gray-900 font-display tracking-tight">TravelCraft</span>
             </Link>
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <div className="hidden md:flex items-center space-x-6 animate-slide-in-right">
+              <Link href="/" className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 font-medium">
                 Home
               </Link>
-              <Link href="/generator" className="text-sky-600 font-medium">
+              <Link href="/generator" className="text-sky-600 font-semibold">
                 Plan Trip
               </Link>
-              <Link href="/trips" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <Link href="/trips" className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 font-medium">
                 My Trips
               </Link>
             </div>
@@ -88,53 +88,53 @@ export default function ItineraryGenerator() {
       </nav>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-4xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Create Your Perfect Itinerary</h1>
-          <p className="text-xl text-gray-600">Tell us your preferences and we'll craft a personalized travel plan</p>
+        <div className="text-center mb-12 animate-slide-up">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4 font-display tracking-tight">Create Your Perfect Itinerary</h1>
+          <p className="text-xl text-gray-600 font-light">Tell us your preferences and we'll craft a personalized travel plan</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-8 animate-slide-up" style={{animationDelay: '0.2s'}}>
           {/* Destination & Dates */}
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-left">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <MapPin className="h-5 w-5 text-sky-600" />
-                <span>Destination & Dates</span>
+                <span className="font-display">Destination & Dates</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <Label htmlFor="destination">Where would you like to go?</Label>
+                <Label htmlFor="destination" className="font-medium">Where would you like to go?</Label>
                 <Input
                   id="destination"
                   placeholder="e.g., Paris, France or Tokyo, Japan"
                   value={formData.destination}
                   onChange={(e) => setFormData(prev => ({ ...prev, destination: e.target.value }))}
                   required
-                  className="mt-2"
+                  className="mt-2 transition-all duration-300 focus:scale-[1.02]"
                 />
               </div>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="startDate">Start Date</Label>
+                  <Label htmlFor="startDate" className="font-medium">Start Date</Label>
                   <Input
                     id="startDate"
                     type="date"
                     value={formData.startDate}
                     onChange={(e) => setFormData(prev => ({ ...prev, startDate: e.target.value }))}
                     required
-                    className="mt-2"
+                    className="mt-2 transition-all duration-300 focus:scale-[1.02]"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="endDate">End Date</Label>
+                  <Label htmlFor="endDate" className="font-medium">End Date</Label>
                   <Input
                     id="endDate"
                     type="date"
                     value={formData.endDate}
                     onChange={(e) => setFormData(prev => ({ ...prev, endDate: e.target.value }))}
                     required
-                    className="mt-2"
+                    className="mt-2 transition-all duration-300 focus:scale-[1.02]"
                   />
                 </div>
               </div>
@@ -142,19 +142,19 @@ export default function ItineraryGenerator() {
           </Card>
 
           {/* Budget & Group */}
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-right" style={{animationDelay: '0.1s'}}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <DollarSign className="h-5 w-5 text-emerald-600" />
-                <span>Budget & Group Size</span>
+                <span className="font-display">Budget & Group Size</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="budget">Budget per person (USD)</Label>
+                  <Label htmlFor="budget" className="font-medium">Budget per person (USD)</Label>
                   <Select value={formData.budget} onValueChange={(value) => setFormData(prev => ({ ...prev, budget: value }))}>
-                    <SelectTrigger className="mt-2">
+                    <SelectTrigger className="mt-2 transition-all duration-300 hover:scale-[1.02]">
                       <SelectValue placeholder="Select budget range" />
                     </SelectTrigger>
                     <SelectContent>
@@ -165,9 +165,9 @@ export default function ItineraryGenerator() {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="groupSize">Group Size</Label>
+                  <Label htmlFor="groupSize" className="font-medium">Group Size</Label>
                   <Select value={formData.groupSize} onValueChange={(value) => setFormData(prev => ({ ...prev, groupSize: value }))}>
-                    <SelectTrigger className="mt-2">
+                    <SelectTrigger className="mt-2 transition-all duration-300 hover:scale-[1.02]">
                       <SelectValue placeholder="Number of travelers" />
                     </SelectTrigger>
                     <SelectContent>
@@ -183,23 +183,24 @@ export default function ItineraryGenerator() {
           </Card>
 
           {/* Interests */}
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-left" style={{animationDelay: '0.2s'}}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Heart className="h-5 w-5 text-rose-600" />
-                <span>What interests you?</span>
+                <span className="font-display">What interests you?</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {interests.map((interest) => (
-                  <div key={interest} className="flex items-center space-x-2">
+                  <div key={interest} className="flex items-center space-x-2 group">
                     <Checkbox
                       id={interest}
                       checked={formData.interests.includes(interest)}
                       onCheckedChange={() => handleInterestToggle(interest)}
+                      className="transition-all duration-300 group-hover:scale-110"
                     />
-                    <Label htmlFor={interest} className="text-sm cursor-pointer">
+                    <Label htmlFor={interest} className="text-sm cursor-pointer font-medium transition-colors group-hover:text-sky-600">
                       {interest}
                     </Label>
                   </div>
@@ -209,19 +210,19 @@ export default function ItineraryGenerator() {
           </Card>
 
           {/* Travel Style */}
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-right" style={{animationDelay: '0.3s'}}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Clock className="h-5 w-5 text-amber-600" />
-                <span>Travel Style & Preferences</span>
+                <span className="font-display">Travel Style & Preferences</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="pace">Travel Pace</Label>
+                  <Label htmlFor="pace" className="font-medium">Travel Pace</Label>
                   <Select value={formData.pace} onValueChange={(value) => setFormData(prev => ({ ...prev, pace: value }))}>
-                    <SelectTrigger className="mt-2">
+                    <SelectTrigger className="mt-2 transition-all duration-300 hover:scale-[1.02]">
                       <SelectValue placeholder="How fast-paced?" />
                     </SelectTrigger>
                     <SelectContent>
@@ -232,9 +233,9 @@ export default function ItineraryGenerator() {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="accommodation">Accommodation Style</Label>
+                  <Label htmlFor="accommodation" className="font-medium">Accommodation Style</Label>
                   <Select value={formData.accommodation} onValueChange={(value) => setFormData(prev => ({ ...prev, accommodation: value }))}>
-                    <SelectTrigger className="mt-2">
+                    <SelectTrigger className="mt-2 transition-all duration-300 hover:scale-[1.02]">
                       <SelectValue placeholder="Preferred lodging" />
                     </SelectTrigger>
                     <SelectContent>
@@ -247,25 +248,25 @@ export default function ItineraryGenerator() {
                 </div>
               </div>
               <div>
-                <Label htmlFor="notes">Additional Notes</Label>
+                <Label htmlFor="notes" className="font-medium">Additional Notes</Label>
                 <Textarea
                   id="notes"
                   placeholder="Any specific requirements, accessibility needs, or preferences..."
                   value={formData.notes}
                   onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-                  className="mt-2"
+                  className="mt-2 transition-all duration-300 focus:scale-[1.02]"
                   rows={3}
                 />
               </div>
             </CardContent>
           </Card>
 
-          <div className="text-center">
+          <div className="text-center animate-slide-up" style={{animationDelay: '0.4s'}}>
             <Button 
               type="submit" 
               size="lg" 
               disabled={isGenerating}
-              className="text-lg px-12 py-6 bg-sky-600 hover:bg-sky-700"
+              className="text-lg px-12 py-6 bg-sky-600 hover:bg-sky-700 transition-all duration-300 hover:scale-105 hover:shadow-xl font-semibold"
             >
               {isGenerating ? (
                 <>
@@ -277,7 +278,7 @@ export default function ItineraryGenerator() {
               )}
             </Button>
             {isGenerating && (
-              <p className="text-gray-600 mt-4">
+              <p className="text-gray-600 mt-4 font-light animate-pulse">
                 Analyzing destinations, checking weather, optimizing routes...
               </p>
             )}
