@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Calendar, DollarSign, Clock, Plus } from 'lucide-react';
+import { MapPin, Calendar, DollarSign, Clock, Plus, Compass, Globe, Map } from 'lucide-react';
 import Link from 'next/link';
 
 const mockTrips = [
@@ -53,18 +53,23 @@ export default function MyTrips() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2 group">
-              <MapPin className="h-8 w-8 text-sky-600 transition-transform group-hover:scale-110" />
+              <div className="bg-blue-600 p-2 rounded-lg">
+                <Compass className="h-6 w-6 text-white" />
+              </div>
               <span className="text-2xl font-bold text-gray-900 font-display tracking-tight">TravelCraft</span>
             </Link>
             <div className="hidden md:flex items-center space-x-6 animate-slide-in-right">
-              <Link href="/" className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 font-medium">
-                Home
+              <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1">
+                <Globe className="h-4 w-4" />
+                <span>Home</span>
               </Link>
-              <Link href="/generator" className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 font-medium">
-                Plan Trip
+              <Link href="/generator" className="text-gray-600 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1">
+                <Map className="h-4 w-4" />
+                <span>Plan Trip</span>
               </Link>
-              <Link href="/trips" className="text-sky-600 font-semibold">
-                My Trips
+              <Link href="/trips" className="text-blue-600 font-semibold flex items-center space-x-1">
+                <Calendar className="h-4 w-4" />
+                <span>My Trips</span>
               </Link>
             </div>
           </div>
@@ -78,7 +83,7 @@ export default function MyTrips() {
             <p className="text-xl text-gray-600 font-light">Manage and view your travel itineraries</p>
           </div>
           <Link href="/generator" className="animate-slide-in-right">
-            <Button size="lg" className="transition-all duration-300 hover:scale-105 hover:shadow-lg font-semibold">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 font-semibold">
               <Plus className="h-5 w-5 mr-2" />
               New Trip
             </Button>
@@ -123,13 +128,13 @@ export default function MyTrips() {
                   </div>
                   <div className="flex gap-2 pt-2">
                     <Link href={`/trip/${trip.id}`} className="flex-1">
-                      <Button variant="outline" className="w-full transition-all duration-300 hover:scale-105 font-medium">
+                      <Button variant="outline" className="w-full border-blue-200 text-blue-600 hover:bg-blue-50 font-medium">
                         View Details
                       </Button>
                     </Link>
                     {trip.status === 'draft' && (
                       <Link href="/generator" className="flex-1">
-                        <Button className="w-full transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium">
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700 font-medium">
                           Continue
                         </Button>
                       </Link>
@@ -148,7 +153,7 @@ export default function MyTrips() {
             <h3 className="text-2xl font-semibold text-gray-900 mb-2 font-display">No trips yet</h3>
             <p className="text-gray-600 mb-6 font-light">Start planning your first adventure with TravelCraft</p>
             <Link href="/generator">
-              <Button size="lg" className="transition-all duration-300 hover:scale-105 hover:shadow-lg font-semibold">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 font-semibold">
                 <Plus className="h-5 w-5 mr-2" />
                 Plan Your First Trip
               </Button>

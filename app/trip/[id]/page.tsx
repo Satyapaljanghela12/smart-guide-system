@@ -18,7 +18,8 @@ import {
   Camera,
   Utensils,
   Building,
-  Heart
+  Heart,
+  Compass
 } from 'lucide-react';
 import Link from 'next/link';
 import { mockItinerary, type Activity } from '@/lib/mock-data';
@@ -65,15 +66,17 @@ export default function TripDetails() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2 group">
-              <MapPin className="h-8 w-8 text-sky-600 transition-transform group-hover:scale-110" />
+              <div className="bg-blue-600 p-2 rounded-lg">
+                <Compass className="h-6 w-6 text-white" />
+              </div>
               <span className="text-2xl font-bold text-gray-900 font-display tracking-tight">TravelCraft</span>
             </Link>
             <div className="flex items-center space-x-4 animate-slide-in-right">
-              <Button variant="outline" size="sm" onClick={shareItinerary} className="transition-all duration-300 hover:scale-105">
+              <Button variant="outline" size="sm" onClick={shareItinerary} className="border-blue-200 text-blue-600 hover:bg-blue-50">
                 <Share2 className="h-4 w-4 mr-2" />
                 Share
               </Button>
-              <Button size="sm" onClick={downloadItinerary} className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <Button size="sm" onClick={downloadItinerary} className="bg-blue-600 hover:bg-blue-700">
                 <Download className="h-4 w-4 mr-2" />
                 Download
               </Button>
@@ -83,12 +86,12 @@ export default function TripDetails() {
       </nav>
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-sky-600 to-emerald-600 text-white animate-slide-up">
+      <div className="bg-gradient-to-r from-blue-600 to-sky-600 text-white animate-slide-up">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end animate-slide-in-left">
             <div>
               <h1 className="text-4xl font-bold mb-4 font-display tracking-tight">{itinerary.destination}</h1>
-              <p className="text-xl text-sky-100 mb-6 max-w-2xl font-light">{itinerary.overview}</p>
+              <p className="text-xl text-blue-100 mb-6 max-w-2xl font-light">{itinerary.overview}</p>
               <div className="flex flex-wrap gap-4 text-sm font-medium">
                 <div className="flex items-center">
                   <Calendar className="h-4 w-4 mr-1" />
@@ -113,9 +116,9 @@ export default function TripDetails() {
           {/* Main Content */}
           <div className="lg:col-span-2 animate-slide-in-left">
             <Tabs value={selectedDay.toString()} onValueChange={(value) => setSelectedDay(parseInt(value))}>
-              <TabsList className="grid grid-cols-3 lg:grid-cols-5 w-full mb-8 animate-slide-up">
+              <TabsList className="grid grid-cols-3 lg:grid-cols-5 w-full mb-8 animate-slide-up bg-blue-50">
                 {itinerary.days.map((day, index) => (
-                  <TabsTrigger key={index} value={index.toString()} className="text-sm font-medium transition-all duration-300 hover:scale-105">
+                  <TabsTrigger key={index} value={index.toString()} className="text-sm font-medium data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                     Day {index + 1}
                   </TabsTrigger>
                 ))}
@@ -157,11 +160,11 @@ export default function TripDetails() {
                         {day.activities.map((activity, activityIndex) => {
                           const IconComponent = activityIcons[activity.type as keyof typeof activityIcons] || MapPin;
                           return (
-                            <div key={activity.id} className="border rounded-lg p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-slide-in-left" style={{animationDelay: `${activityIndex * 0.1}s`}}>
+                            <div key={activity.id} className="border border-blue-100 rounded-lg p-6 hover:shadow-lg transition-all duration-300 animate-slide-in-left" style={{animationDelay: `${activityIndex * 0.1}s`}}>
                               <div className="flex items-start justify-between mb-4">
                                 <div className="flex items-start space-x-4">
-                                  <div className="bg-sky-100 p-2 rounded-lg transition-all duration-300 hover:scale-110">
-                                    <IconComponent className="h-5 w-5 text-sky-600" />
+                                  <div className="bg-blue-100 p-2 rounded-lg">
+                                    <IconComponent className="h-5 w-5 text-blue-600" />
                                   </div>
                                   <div className="flex-1">
                                     <h3 className="text-xl font-semibold mb-1 font-display">{activity.name}</h3>
@@ -209,9 +212,9 @@ export default function TripDetails() {
                       </div>
 
                       {day.transportNotes.length > 0 && (
-                        <div className="mt-6 p-4 bg-sky-50 rounded-lg">
+                        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                           <h4 className="font-semibold mb-2 flex items-center">
-                            <Navigation className="h-4 w-4 mr-1 text-sky-600" />
+                            <Navigation className="h-4 w-4 mr-1 text-blue-600" />
                             Transportation Tips
                           </h4>
                           <ul className="text-sm text-gray-700 space-y-1 font-light">
@@ -234,7 +237,7 @@ export default function TripDetails() {
             <Card className="transition-all duration-300 hover:shadow-lg animate-slide-up">
               <CardHeader>
                 <CardTitle className="flex items-center font-display">
-                  <Heart className="h-5 w-5 mr-2 text-rose-600" />
+                  <Heart className="h-5 w-5 mr-2 text-blue-600" />
                   Trip Highlights
                 </CardTitle>
               </CardHeader>
@@ -282,7 +285,7 @@ export default function TripDetails() {
                   <span className="font-medium">{itinerary.days.reduce((acc, day) => acc + day.activities.length, 0)}</span>
                 </div>
                 <Separator />
-                <Button className="w-full transition-all duration-300 hover:scale-105 hover:shadow-lg font-semibold" onClick={downloadItinerary}>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 font-semibold" onClick={downloadItinerary}>
                   <Download className="h-4 w-4 mr-2" />
                   Download Full Itinerary
                 </Button>

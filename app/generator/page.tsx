@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { MapPin, Calendar, DollarSign, Heart, Clock, Loader as Loader2 } from 'lucide-react';
+import { MapPin, Calendar, DollarSign, Heart, Clock, Loader as Loader2, Compass, Globe, Map } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -69,18 +69,23 @@ export default function ItineraryGenerator() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2 group">
-              <MapPin className="h-8 w-8 text-sky-600 transition-transform group-hover:scale-110" />
+              <div className="bg-blue-600 p-2 rounded-lg">
+                <Compass className="h-6 w-6 text-white" />
+              </div>
               <span className="text-2xl font-bold text-gray-900 font-display tracking-tight">TravelCraft</span>
             </Link>
             <div className="hidden md:flex items-center space-x-6 animate-slide-in-right">
-              <Link href="/" className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 font-medium">
-                Home
+              <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1">
+                <Globe className="h-4 w-4" />
+                <span>Home</span>
               </Link>
-              <Link href="/generator" className="text-sky-600 font-semibold">
-                Plan Trip
+              <Link href="/generator" className="text-blue-600 font-semibold flex items-center space-x-1">
+                <Map className="h-4 w-4" />
+                <span>Plan Trip</span>
               </Link>
-              <Link href="/trips" className="text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 font-medium">
-                My Trips
+              <Link href="/trips" className="text-gray-600 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1">
+                <Calendar className="h-4 w-4" />
+                <span>My Trips</span>
               </Link>
             </div>
           </div>
@@ -98,7 +103,7 @@ export default function ItineraryGenerator() {
           <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-left">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <MapPin className="h-5 w-5 text-sky-600" />
+                <MapPin className="h-5 w-5 text-blue-600" />
                 <span className="font-display">Destination & Dates</span>
               </CardTitle>
             </CardHeader>
@@ -145,7 +150,7 @@ export default function ItineraryGenerator() {
           <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-right" style={{animationDelay: '0.1s'}}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <DollarSign className="h-5 w-5 text-emerald-600" />
+                <DollarSign className="h-5 w-5 text-blue-600" />
                 <span className="font-display">Budget & Group Size</span>
               </CardTitle>
             </CardHeader>
@@ -186,7 +191,7 @@ export default function ItineraryGenerator() {
           <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-left" style={{animationDelay: '0.2s'}}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <Heart className="h-5 w-5 text-rose-600" />
+                <Heart className="h-5 w-5 text-blue-600" />
                 <span className="font-display">What interests you?</span>
               </CardTitle>
             </CardHeader>
@@ -198,9 +203,8 @@ export default function ItineraryGenerator() {
                       id={interest}
                       checked={formData.interests.includes(interest)}
                       onCheckedChange={() => handleInterestToggle(interest)}
-                      className="transition-all duration-300 group-hover:scale-110"
                     />
-                    <Label htmlFor={interest} className="text-sm cursor-pointer font-medium transition-colors group-hover:text-sky-600">
+                    <Label htmlFor={interest} className="text-sm cursor-pointer font-medium transition-colors group-hover:text-blue-600">
                       {interest}
                     </Label>
                   </div>
@@ -213,7 +217,7 @@ export default function ItineraryGenerator() {
           <Card className="transition-all duration-300 hover:shadow-lg animate-slide-in-right" style={{animationDelay: '0.3s'}}>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <Clock className="h-5 w-5 text-amber-600" />
+                <Clock className="h-5 w-5 text-blue-600" />
                 <span className="font-display">Travel Style & Preferences</span>
               </CardTitle>
             </CardHeader>
@@ -266,7 +270,7 @@ export default function ItineraryGenerator() {
               type="submit" 
               size="lg" 
               disabled={isGenerating}
-              className="text-lg px-12 py-6 bg-sky-600 hover:bg-sky-700 transition-all duration-300 hover:scale-105 hover:shadow-xl font-semibold"
+              className="text-lg px-12 py-6 bg-blue-600 hover:bg-blue-700 font-semibold"
             >
               {isGenerating ? (
                 <>
@@ -274,7 +278,10 @@ export default function ItineraryGenerator() {
                   Crafting Your Itinerary...
                 </>
               ) : (
-                'Generate My Itinerary'
+                <>
+                  <Compass className="mr-2 h-5 w-5" />
+                  Generate My Itinerary
+                </>
               )}
             </Button>
             {isGenerating && (
